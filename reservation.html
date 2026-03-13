@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grilli Restaurant - Table Reservation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .restaurant-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .tagline {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Information */
+        .contact-section {
+            padding: 30px 40px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .contact-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-title i {
+            color: #333;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .contact-value.phone {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .contact-value.email {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-value.email:hover {
+            text-decoration: underline;
+        }
+
+        /* Call Now Button */
+        .call-now-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto 0;
+        }
+
+        .call-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .call-now-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Separator Line */
+        .separator {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 0 40px;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 30px 40px;
+            background-color: white;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-title i {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        label.required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #333;
+            transition: all 0.3s;
+            background-color: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #666;
+            box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.1);
+        }
+
+        /* Placeholder styling */
+        ::placeholder {
+            color: #999;
+            font-weight: normal;
+        }
+
+        /* Phone input styling */
+        input#phone {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Date input styling */
+        input#date {
+            background-color: white;
+            font-family: inherit;
+        }
+
+        /* Time select styling */
+        select#time {
+            background-color: white;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 500;
+        }
+
+        /* Persons counter */
+        .persons-counter {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .counter-btn {
+            background-color: #f8f9fa;
+            border: none;
+            color: #333;
+            font-size: 18px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .counter-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .persons-counter input {
+            flex: 1;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Textarea styling */
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        /* Form validation */
+        .error-message {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            display: none;
+        }
+
+        .error-message i {
+            font-size: 12px;
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #dc3545;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Call button in form */
+        .call-form-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .call-form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Emergency section */
+        .emergency-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fff8e1;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+            text-align: center;
+        }
+
+        .emergency-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .emergency-btn {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message i {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 25px 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .restaurant-name {
+                font-size: 28px;
+            }
+            
+            .tagline {
+                font-size: 22px;
+            }
+            
+            .description {
+                font-size: 15px;
+            }
+            
+            .contact-section, .form-section {
+                padding: 25px 20px;
+            }
+            
+            .separator {
+                margin: 0 20px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .restaurant-name {
+                font-size: 24px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+            
+            .contact-title, .form-title {
+                font-size: 18px;
+            }
+            
+            .submit-btn, .call-now-btn, .call-form-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+            
+            input, select, textarea {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="restaurant-name">Grilli Restaurant</h1>
+            <h2 class="tagline">Book Your Perfect Table</h2>
+            <p class="description">
+                Reserve your table at Grilli Restaurant for an unforgettable dining experience. 
+                Our traditional recipes with modern twists await you in a hygienic, welcoming atmosphere.
+            </p>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="contact-section">
+            <h2 class="contact-title">
+                <i class="fas fa-address-card"></i>
+                Contact Information
+            </h2>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Address</div>
+                        <div class="contact-value">Restaurant St, Delicious City, Surat</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Opening Hours</div>
+                        <div class="contact-value">Daily: 8:00 AM to 10:00 PM</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Phone Number</div>
+                        <div class="contact-value phone">+91 990-480-0085</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Email Address</div>
+                        <a href="mailto:papatel4045@gmail.com" class="contact-value email">
+                            papatel4045@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="call-now-btn" onclick="openCallModal()">
+                <i class="fas fa-phone"></i>
+                Call Now for Reservations
+            </button>
+        </div>
+
+        <!-- Separator Line -->
+        <div class="separator"></div>
+
+        <!-- Reservation Form Section -->
+        <div class="form-section">
+            <h2 class="form-title">
+                <i class="fas fa-calendar-alt"></i>
+                Online Reservation
+            </h2>
+            
+            <form id="reservationForm">
+                <!-- Name Input -->
+                <div class="form-group">
+                    <label for="name" class="required">YOUR FULL NAME</label>
+                    <input type="text" 
+                           id="name" 
+                           placeholder="Enter your full name"
+                           required>
+                    <div class="error-message" id="nameError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="nameErrorText">Please enter your name</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Phone Number Input -->
+                    <div class="form-group">
+                        <label for="phone" class="required">PHONE NUMBER</label>
+                        <input type="tel" 
+                               id="phone" 
+                               placeholder="+91 99048 00085"
+                               maxlength="10"
+                               required>
+                        <div class="error-message" id="phoneError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span id="phoneErrorText">Please enter a valid 10-digit Indian phone number</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="email" class="required">EMAIL ADDRESS</label>
+                        <input type="email" 
+                               id="email" 
+                               placeholder="your.email@example.com"
+                               required>
+                        <div class="error-message" id="emailError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span id="emailErrorText">Please enter a valid email address</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Date Input -->
+                    <div class="form-group">
+                        <label for="date" class="required">RESERVATION DATE</label>
+                        <input type="date" id="date" required>
+                        <div class="error-message" id="dateError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Please select a date
+                        </div>
+                    </div>
+                    
+                    <!-- Time Select -->
+                    <div class="form-group">
+                        <label for="time" class="required">TIME (24-HOUR FORMAT)</label>
+                        <select id="time" required>
+                            <option value="">Select time</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+                            <option value="22:00">22:00</option>
+                        </select>
+                        <div class="error-message" id="timeError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Please select time
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Persons Counter -->
+                <div class="form-group">
+                    <label for="persons" class="required">NUMBER OF PERSONS</label>
+                    <div class="persons-counter">
+                        <button type="button" class="counter-btn" id="decreasePersons">-</button>
+                        <input type="number" id="persons" value="2" min="1" max="10" readonly>
+                        <button type="button" class="counter-btn" id="increasePersons">+</button>
+                    </div>
+                </div>
+                
+                <!-- Special Requests -->
+                <div class="form-group">
+                    <label for="specialRequests">SPECIAL REQUESTS</label>
+                    <textarea id="specialRequests" placeholder="Any special requests, dietary restrictions, allergies, or celebration notes..."></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-check-circle"></i>
+                    Confirm Online Reservation
+                </button>
+                
+                <!-- Call Button -->
+                <button type="button" class="call-form-btn" onclick="openCallModal()">
+                    <i class="fas fa-phone"></i>
+                    Prefer to Call? Click Here
+                </button>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <div id="successText">Reservation confirmed! We'll contact you shortly.</div>
+                </div>
+            </form>
+            
+            <!-- Emergency Section -->
+            <div class="emergency-section">
+                <div class="emergency-title">For urgent reservations:</div>
+                <button class="emergency-btn" onclick="openCallModal()">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Immediate Assistance
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Grilli Restaurant. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Restaurant contact information
+        const restaurantPhone = '+919904800085';
+        const formattedPhone = '+91 990-480-0085';
+        const restaurantEmail = 'papatel4045@gmail.com';
+        const restaurantAddress = 'Restaurant St, Delicious City, Surat';
+        const openingHours = 'Daily: 8:00 AM to 10:00 PM';
+
+        // Call modal functionality
+        function openCallModal() {
+            alert(`Calling ${formattedPhone}...\n\nYou can reach us at:\n${formattedPhone}\n\nWe're available ${openingHours}`);
+            
+            // In mobile browsers, tel: link will open dialer
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = `tel:${restaurantPhone}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const form = document.getElementById('reservationForm');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('email');
+            const dateInput = document.getElementById('date');
+            const timeSelect = document.getElementById('time');
+            const personsInput = document.getElementById('persons');
+            const decreasePersonsBtn = document.getElementById('decreasePersons');
+            const increasePersonsBtn = document.getElementById('increasePersons');
+            const specialRequests = document.getElementById('specialRequests');
+            const successMessage = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            
+            // Error elements
+            const nameError = document.getElementById('nameError');
+            const phoneError = document.getElementById('phoneError');
+            const emailError = document.getElementById('emailError');
+            const dateError = document.getElementById('dateError');
+            const timeError = document.getElementById('timeError');
+
+            // Set default date to April 2, 2026 (as shown in image)
+            const defaultDate = '2026-04-02';
+            dateInput.value = defaultDate;
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+
+            // Person counter functionality
+            decreasePersonsBtn.addEventListener('click', function() {
+                let currentValue = parseInt(personsInput.value);
+                if (currentValue > 1) {
+                    personsInput.value = currentValue - 1;
+                }
+            });
+            
+            increasePersonsBtn.addEventListener('click', function() {
+                let currentValue = parseInt(personsInput.value);
+                if (currentValue < 10) {
+                    personsInput.value = currentValue + 1;
+                }
+            });
+
+            // Validation functions
+            function validateName(name) {
+                return name.trim().length >= 2;
+            }
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validateIndianPhoneNumber(phone) {
+                // Remove all non-digit characters
+                const cleaned = phone.replace(/\D/g, '');
+                
+                // Check if exactly 10 digits
+                if (cleaned.length !== 10) {
+                    return {
+                        isValid: false,
+                        message: 'Phone number must be exactly 10 digits'
+                    };
+                }
+                
+                // Check if starts with 6, 7, 8, or 9
+                const firstDigit = cleaned.charAt(0);
+                if (!['6', '7', '8', '9'].includes(firstDigit)) {
+                    return {
+                        isValid: false,
+                        message: 'Indian mobile numbers must start with 6, 7, 8, or 9'
+                    };
+                }
+                
+                // All checks passed
+                return {
+                    isValid: true,
+                    message: 'Valid Indian mobile number'
+                };
+            }
+
+            // Format phone number
+            function formatPhoneNumber(phone) {
+                const cleaned = phone.replace(/\D/g, '');
+                if (cleaned.length === 10) {
+                    return `+91 ${cleaned.substring(0, 5)} ${cleaned.substring(5)}`;
+                }
+                return phone;
+            }
+
+            // Format date for display
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+            }
+
+            // Generate reference ID
+            function generateReferenceId() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                let result = 'GR' + Date.now().toString().slice(-6);
+                for (let i = 0; i < 4; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            }
+
+            // Hide all error messages
+            function hideAllErrors() {
+                nameError.style.display = 'none';
+                phoneError.style.display = 'none';
+                emailError.style.display = 'none';
+                dateError.style.display = 'none';
+                timeError.style.display = 'none';
+                
+                // Remove error classes
+                document.querySelectorAll('.form-group').forEach(group => {
+                    group.classList.remove('error');
+                });
+            }
+
+            // Real-time validation
+            nameInput.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    nameError.style.display = 'none';
+                    nameInput.parentElement.classList.remove('error');
+                } else if (!validateName(this.value)) {
+                    nameError.style.display = 'flex';
+                    nameInput.parentElement.classList.add('error');
+                } else {
+                    nameError.style.display = 'none';
+                    nameInput.parentElement.classList.remove('error');
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                const email = this.value.trim();
+                if (email === '') {
+                    emailError.style.display = 'none';
+                    emailInput.parentElement.classList.remove('error');
+                } else if (!validateEmail(email)) {
+                    emailError.style.display = 'flex';
+                    emailInput.parentElement.classList.add('error');
+                } else {
+                    emailError.style.display = 'none';
+                    emailInput.parentElement.classList.remove('error');
+                }
+            });
+
+            phoneInput.addEventListener('input', function() {
+                // Allow only digits
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Limit to 10 digits
+                if (this.value.length > 10) {
+                    this.value = this.value.substring(0, 10);
+                }
+                
+                // Validate
+                const validation = validateIndianPhoneNumber(this.value);
+                
+                if (this.value === '') {
+                    phoneError.style.display = 'none';
+                    phoneInput.parentElement.classList.remove('error');
+                } else if (!validation.isValid) {
+                    phoneError.style.display = 'flex';
+                    phoneInput.parentElement.classList.add('error');
+                } else {
+                    phoneError.style.display = 'none';
+                    phoneInput.parentElement.classList.remove('error');
+                    // Auto-format phone number
+                    if (this.value.length === 10) {
+                        this.value = this.value.replace(/(\d{5})(\d{5})/, '$1 $2');
+                    }
+                }
+            });
+
+            // Form validation and submission
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                let isValid = true;
+                
+                // Hide all errors first
+                hideAllErrors();
+                
+                // Validate name
+                if (!nameInput.value.trim()) {
+                    nameError.style.display = 'flex';
+                    nameInput.parentElement.classList.add('error');
+                    isValid = false;
+                } else if (!validateName(nameInput.value)) {
+                    nameError.style.display = 'flex';
+                    nameInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                // Validate email
+                if (!emailInput.value.trim()) {
+                    emailError.style.display = 'flex';
+                    emailInput.parentElement.classList.add('error');
+                    isValid = false;
+                } else if (!validateEmail(emailInput.value.trim())) {
+                    emailError.style.display = 'flex';
+                    emailInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                // Validate phone
+                const phone = phoneInput.value.replace(/\s/g, '');
+                if (!phone) {
+                    phoneError.style.display = 'flex';
+                    phoneInput.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    const phoneValidation = validateIndianPhoneNumber(phone);
+                    if (!phoneValidation.isValid) {
+                        phoneError.style.display = 'flex';
+                        phoneInput.parentElement.classList.add('error');
+                        isValid = false;
+                    }
+                }
+                
+                // Validate date
+                if (!dateInput.value) {
+                    dateError.style.display = 'flex';
+                    dateInput.parentElement.classList.add('error');
+                    isValid = false;
+                } else if (new Date(dateInput.value) < new Date(today)) {
+                    dateError.textContent = 'Please select a future date';
+                    dateError.style.display = 'flex';
+                    dateInput.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                // Validate time
+                if (!timeSelect.value) {
+                    timeError.style.display = 'flex';
+                    timeSelect.parentElement.classList.add('error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Generate reference ID
+                    const referenceId = generateReferenceId();
+                    
+                    // Show success message
+                    successText.innerHTML = `<strong>Reservation confirmed!</strong><br>Thank you ${nameInput.value}! Your table for ${personsInput.value} persons has been booked. Reference ID: <strong>${referenceId}</strong>`;
+                    successMessage.style.display = 'block';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Log reservation data
+                    console.log('=== RESERVATION CONFIRMED ===');
+                    console.log('Name:', nameInput.value);
+                    console.log('Phone:', formatPhoneNumber(phone));
+                    console.log('Email:', emailInput.value);
+                    console.log('Date:', formatDate(dateInput.value));
+                    console.log('Time:', timeSelect.value);
+                    console.log('Persons:', personsInput.value);
+                    console.log('Special Requests:', specialRequests.value || 'None');
+                    console.log('Reference ID:', referenceId);
+                    console.log('=============================');
+                    
+                    // Reset form after 8 seconds
+                    setTimeout(() => {
+                        form.reset();
+                        dateInput.value = defaultDate;
+                        personsInput.value = 2;
+                        successMessage.style.display = 'none';
+                        hideAllErrors();
+                    }, 8000);
+                }
+            });
+
+            // Clear errors on focus
+            nameInput.addEventListener('focus', function() {
+                nameError.style.display = 'none';
+                nameInput.parentElement.classList.remove('error');
+            });
+
+            emailInput.addEventListener('focus', function() {
+                emailError.style.display = 'none';
+                emailInput.parentElement.classList.remove('error');
+            });
+
+            phoneInput.addEventListener('focus', function() {
+                phoneError.style.display = 'none';
+                phoneInput.parentElement.classList.remove('error');
+            });
+
+            dateInput.addEventListener('focus', function() {
+                dateError.style.display = 'none';
+                dateInput.parentElement.classList.remove('error');
+            });
+
+            timeSelect.addEventListener('focus', function() {
+                timeError.style.display = 'none';
+                timeSelect.parentElement.classList.remove('error');
+            });
+
+            // Format phone placeholder on load
+            phoneInput.placeholder = '+91 99048 00085';
+            
+            // Pre-fill with example data for testing
+            function fillExampleData() {
+                nameInput.value = 'John Smith';
+                emailInput.value = 'john.smith@example.com';
+                phoneInput.value = '9876543210';
+                specialRequests.value = 'Window seat preferred, please';
+            }
+            
+            // Uncomment for testing:
+            // fillExampleData();
+        });
+    </script>
+</body>
+</html>

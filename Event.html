@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Event Booking -  Grilli Restaurant</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Header */
+    header {
+      background: #111;
+      padding: 20px 0;
+      border-bottom: 2px solid #c19a6b;
+    }
+    
+    .logo {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #c19a6b;
+      font-weight: bold;
+    }
+    
+    .logo span {
+      color: #fff;
+    }
+    
+    nav {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+    }
+    
+    nav a:hover {
+      color: #c19a6b;
+    }
+    
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1543711081-53d8d1c5d87a?w=500&auto=format&fit=crop&q=60');
+      background-size: cover;
+      background-position: center;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #c19a6b;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+    
+    /* Events */
+    .events {
+      margin: 40px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #c19a6b;
+    }
+    
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .event-card {
+      background: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #333;
+      transition: transform 0.3s;
+    }
+    
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .event-img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    
+    .event-content {
+      padding: 20px;
+    }
+    
+    .event-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    
+    .event-price {
+      color: #c19a6b;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .event-features {
+      list-style: none;
+      margin: 15px 0;
+    }
+    
+    .event-features li {
+      padding: 5px 0;
+      color: #ccc;
+      border-bottom: 1px solid #222;
+    }
+    
+    .event-btn {
+      display: block;
+      width: 100%;
+      background: #c19a6b;
+      color: #000;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    
+    .event-btn:hover {
+      background: #d4b48c;
+    }
+    
+    /* Booking Form */
+    .booking-form {
+      background: #111;
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      margin: 40px 0;
+    }
+    
+    .booking-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #c19a6b;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid #333;
+      margin-top: 40px;
+      color: #777;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid #333;
+    }
+    
+    .modal-close {
+      background: #c19a6b;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+    
+    .success-message {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .success-message h3 {
+      color: #c19a6b;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Grilli <span>Restaurant </span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Book Your Perfect Event</h1>
+      <p>From intimate gatherings to grand celebrations, we make every event special</p>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="events" id="events">
+    <div class="container">
+      <h2 class="section-title">Our Event Packages</h2>
+      
+      <div class="events-grid">
+        <!-- Wedding Event -->
+        <div class="event-card">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&auto=format&fit=crop&q=60" 
+               alt="Wedding" class="event-img">
+          <div class="event-content">
+            <h3>Wedding Package</h3>
+            <div class="event-price">₹5,00,000</div>
+            <p>Your dream wedding celebration with all arrangements</p>
+            <ul class="event-features">
+              <li>✓ Venue for ceremony & reception</li>
+              <li>✓ Custom catering menu</li>
+              <li>✓ Decor & floral arrangements</li>
+              <li>✓ Wedding planner assistance</li>
+            </ul>
+            <button class="event-btn book-now" data-event="Wedding Package" data-price="500000">Book Now</button>
+          </div>
+        </div>
+
+        <!-- Corporate Event -->
+        <div class="event-card">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&auto=format&fit=crop&q=60" 
+               alt="Corporate" class="event-img">
+          <div class="event-content">
+            <h3>Corporate Event</h3>
+            <div class="event-price">₹2,50,000</div>
+            <p>Professional setup for business events</p>
+            <ul class="event-features">
+              <li>✓ Conference facilities</li>
+              <li>✓ AV equipment</li>
+              <li>✓ Business catering</li>
+              <li>✓ High-speed WiFi</li>
+            </ul>
+            <button class="event-btn book-now" data-event="Corporate Event" data-price="250000">Book Now</button>
+          </div>
+        </div>
+
+        <!-- Birthday Event -->
+        <div class="event-card">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&auto=format&fit=crop&q=60" 
+               alt="Birthday" class="event-img">
+          <div class="event-content">
+            <h3>Birthday Party</h3>
+            <div class="event-price">₹1,50,000</div>
+            <p>Fun celebrations for all ages</p>
+            <ul class="event-features">
+              <li>✓ Theme decoration</li>
+              <li>✓ Party entertainment</li>
+              <li>✓ Custom cake & desserts</li>
+              <li>✓ Photography service</li>
+            </ul>
+            <button class="event-btn book-now" data-event="Birthday Party" data-price="150000">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section class="booking-form" id="contact">
+    <div class="container">
+      <h2>Event Inquiry Form</h2>
+      <form id="eventForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="eventType">Event Type *</label>
+            <select id="eventType" required>
+              <option value="">Select Event</option>
+              <option value="wedding">Wedding</option>
+              <option value="corporate">Corporate</option>
+              <option value="birthday">Birthday</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Event Date *</label>
+            <input type="date" id="date" required>
+          </div>
+          <div class="form-group">
+            <label for="guests">Number of Guests *</label>
+            <input type="number" id="guests" min="1" max="500" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Special Requirements</label>
+          <textarea id="message" rows="4"></textarea>
+        </div>
+        
+        <button type="submit" class="event-btn">Submit Inquiry</button>
+      </form>
+      
+      <div class="success-message" id="successMessage">
+        <h3>Thank You!</h3>
+        <p>Your event inquiry has been submitted. We will contact you within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Modal -->
+  <div class="modal" id="bookingModal">
+    <div class="modal-content">
+      <h2>Confirm Booking</h2>
+      <p id="modalEvent">Event: Wedding Package</p>
+      <p id="modalPrice">Price: ₹5,00,000</p>
+      
+      <div class="form-group">
+        <label for="modalName">Your Name *</label>
+        <input type="text" id="modalName" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="modalPhone">Phone Number *</label>
+        <input type="tel" id="modalPhone" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="modalDate">Event Date *</label>
+        <input type="date" id="modalDate" required>
+      </div>
+      
+      <button id="confirmBooking" class="event-btn">Confirm Booking</button>
+      <button class="modal-close" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Royal Restaurant Events</p>
+      <p>Contact: +91-990-480-0084 | events@royalrestaurant.com</p>
+      <p>© 2023 Royal Restaurant. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    document.getElementById('modalDate').min = today;
+
+    // Book Now buttons
+    document.querySelectorAll('.book-now').forEach(button => {
+      button.addEventListener('click', function() {
+        const eventName = this.getAttribute('data-event');
+        const eventPrice = this.getAttribute('data-price');
+        
+        document.getElementById('modalEvent').textContent = `Event: ${eventName}`;
+        document.getElementById('modalPrice').textContent = `Price: ₹${parseInt(eventPrice).toLocaleString()}`;
+        
+        document.getElementById('bookingModal').style.display = 'flex';
+      });
+    });
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('bookingModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('bookingModal');
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Confirm booking
+    document.getElementById('confirmBooking').addEventListener('click', function() {
+      const name = document.getElementById('modalName').value;
+      const event = document.getElementById('modalEvent').textContent;
+      
+      if (!name) {
+        alert('Please enter your name');
+        return;
+      }
+      
+      alert(`Thank you ${name}! Your ${event} booking has been confirmed. We will call you shortly.`);
+      closeModal();
+      
+      // Reset form
+      document.getElementById('modalName').value = '';
+      document.getElementById('modalPhone').value = '';
+      document.getElementById('modalDate').value = '';
+    });
+
+    // Event form submission
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const eventType = document.getElementById('eventType').value;
+      
+      if (!name || !eventType) {
+        alert('Please fill all required fields');
+        return;
+      }
+      
+      // Show success message
+      document.getElementById('successMessage').style.display = 'block';
+      
+      // Reset form
+      this.reset();
+      document.getElementById('date').min = today;
+      
+      // Scroll to success message
+      document.getElementById('successMessage').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // Phone number formatting
+    document.getElementById('phone').addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').substring(0, 10);
+    });
+
+    document.getElementById('modalPhone').addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').substring(0, 10);
+    });
+
+    // Simple email validation
+    document.getElementById('email').addEventListener('blur', function() {
+      const email = this.value;
+      if (email && !email.includes('@')) {
+        alert('Please enter a valid email address');
+        this.focus();
+      }
+    });
+  </script>
+</body>
+</html>

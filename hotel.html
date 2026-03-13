@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grilli Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #fefefe;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header with fixed background image */
+        header {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,50 L50,0 L100,50 L50,100 Z" fill="%23c9a96e" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="%231a1a1a"/><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #c9a96e;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #b89446;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #c9a96e;
+            color: #c9a96e;
+        }
+        
+        .btn-outline:hover {
+            background-color: #c9a96e;
+            color: white;
+        }
+        
+        section {
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #222;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #c9a96e;
+            margin: 15px auto 30px;
+        }
+        
+        .services-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .service-category {
+            margin-bottom: 60px;
+        }
+        
+        .category-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #222;
+            font-size: 1.6rem;
+        }
+        
+        .category-title i {
+            margin-right: 15px;
+            color: #c9a96e;
+            background-color: #f8f5f0;
+            padding: 12px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid #c9a96e;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+        
+        .service-icon {
+            font-size: 2.2rem;
+            color: #c9a96e;
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #222;
+            font-weight: 600;
+        }
+        
+        .service-desc {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .service-features {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        
+        .service-features li {
+            padding: 6px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+        }
+        
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #c9a96e;
+            font-weight: bold;
+        }
+        
+        .highlight-service {
+            background-color: #f8f5f0;
+            border-left: 5px solid #c9a96e;
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .facility-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 3px solid #c9a96e;
+        }
+        
+        .facility-item i {
+            font-size: 1.4rem;
+            color: #c9a96e;
+            margin-right: 15px;
+            width: 30px;
+        }
+        
+        .facility-item div h4 {
+            font-size: 1rem;
+            color: #222;
+            margin-bottom: 5px;
+        }
+        
+        .facility-item div p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .booking-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .testimonial {
+            background-color: #f8f5f0;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            position: relative;
+            border-left: 5px solid #c9a96e;
+        }
+        
+        .testimonial:before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 4rem;
+            color: #c9a96e;
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .guest-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .guest-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #c9a96e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .guest-details h4 {
+            color: #222;
+            margin-bottom: 5px;
+        }
+        
+        .guest-details span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .contact-section {
+            background-color: #222;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .contact-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .contact-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: #c9a96e;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: #111;
+            color: #ddd;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        footer p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #c9a96e;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 20px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-title {
+                font-size: 1.4rem;
+            }
+            
+            .booking-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                margin: 5px 0;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .facilities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Hero Section -->
+    <header>
+        <div class="container">
+            <h1>Grilli Restaurant</h1>
+            <p>At Restaurant 5 & Hotel, we provide a comprehensive range of services designed to ensure your complete comfort, convenience, and satisfaction.</p>
+            <a href="#services" class="btn">Explore Our Services</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Introduction -->
+        <section>
+            <h2 class="section-title">Our Commitment to Excellence</h2>
+            <div class="services-intro">
+                <p>We focus on delivering exceptional hospitality and creating memorable experiences for every guest. From luxurious accommodations to fine dining and event planning, our professional team is dedicated to meeting your every need with attention to detail and personalized service.</p>
+            </div>
+            
+            <!-- Accommodation Services -->
+            <div class="service-category" id="services">
+                <div class="category-title">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Accommodation Services</h3>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <h4 class="service-title">Quality Accommodation</h4>
+                        <p class="service-desc">Luxuriously appointed rooms and suites designed for comfort and relaxation, featuring premium amenities and elegant decor.</p>
+                        <ul class="service-features">
+                            <li>Luxury suites with city views</li>
+                            <li>Premium bedding and linens</li>
+                            <li>Daily housekeeping service</li>
+                            <li>24/7 concierge assistance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h4 class="service-title">Free High-Speed Wi-Fi</h4>
+                        <p class="service-desc">Stay connected with complimentary high-speed internet access throughout the hotel and restaurant.</p>
+                        <ul class="service-features">
+                            <li>Unlimited bandwidth</li>
+                            <li>Secure connection</li>
+                            <li>Multiple device support</li>
+                            <li>24/7 technical support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-parking"></i>
+                        </div>
+                        <h4 class="service-title">Complimentary Parking</h4>
+                        <p class="service-desc">Secure and convenient parking facilities available for all hotel guests and restaurant patrons.</p>
+                        <ul class="service-features">
+                            <li>Valet parking service</li>
+                            <li>24-hour security surveillance</li>
+                            <li>Electric vehicle charging stations</li>
+                            <li>Covered parking available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dining Services -->
+            <div class="service-category">
+                <div class="category-title">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Dining & Culinary Services</h3>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card highlight-service">
+                        <div class="service-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4 class="service-title">Fine Dining Experience</h4>
+                        <p class="service-desc">Exquisite culinary creations prepared by our master chefs using the finest ingredients and innovative techniques.</p>
+                        <ul class="service-features">
+                            <li>Seasonal tasting menus</li>
+                            <li>Extensive wine selection</li>
+                            <li>Chef's table experience</li>
+                            <li>Special dietary accommodations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h4 class="service-title">Online Table Reservations</h4>
+                        <p class="service-desc">Conveniently book your table online through our easy-to-use reservation system.</p>
+                        <ul class="service-features">
+                            <li>Real-time availability</li>
+                            <li>Special requests option</li>
+                            <li>Instant confirmation</li>
+                            <li>Mobile-friendly booking</li>
+                        </ul>
+                        <div class="booking-options">
+                            <a href="reservation.html" class="btn">Book a Table</a>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <h4 class="service-title">24/7 Room Service</h4>
+                        <p class="service-desc">Enjoy restaurant-quality meals in the comfort of your room with our extensive room service menu.</p>
+                        <ul class="service-features">
+                            <li>Round-the-clock availability</li>
+                            <li>Special dietary options</li>
+                            <li>Quick delivery service</li>
+                            <li>In-room dining setup</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event & Celebration Services -->
+            <div class="service-category">
+                <div class="category-title">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Events & Celebrations</h3>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="service-title">Event & Banquet Facilities</h4>
+                        <p class="service-desc">Elegant venues for weddings, corporate events, and special occasions, supported by our professional event planning team.</p>
+                        <ul class="service-features">
+                            <li>Multiple venue options</li>
+                            <li>Customizable event packages</li>
+                            <li>State-of-the-art AV equipment</li>
+                            <li>Professional event coordination</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4 class="service-title">Professional Catering</h4>
+                        <p class="service-desc">Bring our exceptional cuisine to your location with our comprehensive catering services for any event size.</p>
+                        <ul class="service-features">
+                            <li>Custom menu creation</li>
+                            <li>Off-site catering available</li>
+                            <li>Professional serving staff</li>
+                            <li>Complete setup and cleanup</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4 class="service-title">Gift & Celebration Arrangements</h4>
+                        <p class="service-desc">Special packages and arrangements for birthdays, anniversaries, and other celebrations to make your occasion memorable.</p>
+                        <ul class="service-features">
+                            <li>Custom celebration packages</li>
+                            <li>Floral arrangements</li>
+                            <li>Special occasion cakes</li>
+                            <li>Personalized gifts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Facilities -->
+            <div class="service-category">
+                <div class="category-title">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Professional Support & Additional Facilities</h3>
+                </div>
+                <p class="services-intro" style="margin-bottom: 20px;">Our dedicated team and additional amenities ensure a seamless and enjoyable experience</p>
+                
+                <div class="facilities-grid">
+                    <div class="facility-item">
+                        <i class="fas fa-user-tie"></i>
+                        <div>
+                            <h4>Professional Staff Support</h4>
+                            <p>Trained hospitality professionals</p>
+                        </div>
+                    </div>
+                    <div class="facility-item">
+                        <i class="fas fa-bell-concierge"></i>
+                        <div>
+                            <h4>24/7 Concierge</h4>
+                            <p>Assistance with reservations</p>
+                        </div>
+                    </div>
+                    <div class="facility-item">
+                        <i class="fas fa-suitcase-rolling"></i>
+                        <div>
+                            <h4>Luggage Storage</h4>
+                            <p>Secure storage facility</p>
+                        </div>
+                    </div>
+                    <div class="facility-item">
+                        <i class="fas fa-car"></i>
+                        <div>
+                            <h4>Transportation</h4>
+                            <p>Taxi & airport transfer services</p>
+                        </div>
+                    </div>
+                    <div class="facility-item">
+                        <i class="fas fa-dumbbell"></i>
+                        <div>
+                            <h4>Fitness Center</h4>
+                            <p>Well-equipped gym for guests</p>
+                        </div>
+                    </div>
+                    <div class="facility-item">
+                        <i class="fas fa-swimming-pool"></i>
+                        <div>
+                            <h4>Swimming Pool</h4>
+                            <p>Indoor pool with relaxation area</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial with fixed avatar -->
+            <div class="testimonial">
+                <p>"Our stay at Restaurant 5 Hotel was exceptional. The room was luxurious, the dining experience was world-class, and the staff went above and beyond to make our anniversary celebration truly special. The attention to detail in every service was remarkable."</p>
+                <div class="guest-info">
+                    <div class="guest-avatar">SJ</div>
+                    <div class="guest-details">
+                        <h4>Sarah Johnson</h4>
+                        <span>Anniversary Celebration Guest</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Booking CTA -->
+            <div class="booking-options">
+                <a href="reservation.html" class="btn btn-outline">Reserve a Table</a>
+                <a href="event.html" class="btn btn-outline">Plan an Event</a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2>Have Questions About Our Services?</h2>
+            <p>Our team is ready to assist you with any inquiries about our accommodations, dining options, or event facilities.</p>
+            <a href="index.html" class="btn">Contact Us Today</a>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@restaurant5hotel.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Luxury Avenue, City Center</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Restaurant 5 & Hotel © 2023. All rights reserved.</p>
+            <p>Delivering exceptional hospitality and memorable experiences for every guest.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Careers</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Simple booking simulation
+        document.querySelectorAll('.btn').forEach(button => {
+            if(button.textContent.includes('Book') || button.textContent.includes('Reserve') || button.textContent.includes('Contact') || button.textContent.includes('Plan')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your interest! For this demo, imagine you are being redirected to our booking/contact page.');
+                });
+            }
+        });
+        
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

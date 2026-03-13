@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Our Culinary Masters - Grilli Restaurant</title>
+  
+  <style>
+    :root {
+      --gold: #c19a6b;
+      --black: #000000;
+      --dark: #111111;
+      --gray: #333333;
+      --light: #f5f5f5;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--black);
+      color: var(--light);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Navigation */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 3px solid var(--gold);
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                  url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 60px;
+      border-radius: 15px;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      color: #ccc;
+    }
+    
+    /* Stats Bar */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      color: var(--gold);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      color: #aaa;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Chefs Section */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .section-title p {
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Chefs Grid */
+    .chefs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .chef-card {
+      background: var(--dark);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.4s, box-shadow 0.4s;
+      position: relative;
+      border: 1px solid var(--gray);
+    }
+    
+    .chef-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(193, 154, 107, 0.15);
+      border-color: var(--gold);
+    }
+    
+    .chef-image {
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chef-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .chef-card:hover .chef-image img {
+      transform: scale(1.05);
+    }
+    
+    .chef-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    
+    .chef-info {
+      padding: 25px;
+    }
+    
+    .chef-name {
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 5px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .chef-title {
+      color: #aaa;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    
+    .chef-experience {
+      display: inline-block;
+      background: rgba(193, 154, 107, 0.1);
+      color: var(--gold);
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    
+    .chef-bio {
+      color: #ccc;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .signature-dish {
+      background: rgba(193, 154, 107, 0.05);
+      border-left: 3px solid var(--gold);
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    .signature-dish h4 {
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .chef-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .skill {
+      background: var(--gray);
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+    
+    /* Specialties Section */
+    .specialties {
+      background: var(--dark);
+      padding: 60px 40px;
+      border-radius: 15px;
+      margin: 60px 0;
+      border: 1px solid var(--gray);
+    }
+    
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .specialty-item {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 10px;
+      transition: transform 0.3s, background 0.3s;
+    }
+    
+    .specialty-item:hover {
+      transform: translateY(-10px);
+      background: rgba(193, 154, 107, 0.05);
+    }
+    
+    .specialty-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--black);
+      font-size: 1.8rem;
+    }
+    
+    .specialty-item h3 {
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      text-align: center;
+      margin: 60px 0;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .testimonial {
+      background: var(--dark);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid var(--gray);
+    }
+    
+    .testimonial-text {
+      color: #ccc;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    
+    .testimonial-author {
+      color: var(--gold);
+      font-weight: bold;
+    }
+    
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      padding: 60px 40px;
+      background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                  url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      margin: 60px 0;
+    }
+    
+    .cta h2 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: transform 0.3s, background 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .btn:hover {
+      background: #d4b48c;
+      transform: translateY(-3px);
+    }
+    
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--gray);
+      padding: 50px 0 30px;
+      margin-top: 60px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-column h3 {
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+    
+    .footer-column p, .footer-column a {
+      color: #aaa;
+      margin-bottom: 10px;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--gray);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+      transition: background 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+    
+    .copyright {
+      text-align: center;
+      color: #777;
+      padding-top: 30px;
+      border-top: 1px solid var(--gray);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-links {
+        gap: 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .stats {
+        gap: 20px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .chefs-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .specialties {
+        padding: 40px 20px;
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="logo">
+        <i class="fas fa-crown"></i>
+       Grilli Restaurant
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="main.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="chefs.html" class="active">Our Chefs</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+      <h1>Meet Our Culinary Masters</h1>
+      <p>Behind every unforgettable meal at Royal Restaurant is a team of passionate chefs who bring artistry, expertise, and innovation to your plate.</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">75+</div>
+          <div class="stat-label">Years Combined Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">International Awards</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Signature Dishes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Fresh Ingredients</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chefs Section -->
+    <section class="section-title fade-in">
+      <h2>Our Master Chefs</h2>
+      <p>Each chef brings unique expertise and passion to our kitchen</p>
+    </section>
+
+    <div class="chefs-grid">
+      <!-- Chef 1 -->
+      <div class="chef-card fade-in">
+        <div class="chef-image">
+          <div class="chef-badge">Head Chef</div>
+          <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=400&auto=format&fit=crop&q=80" alt="Chef Rajesh Sharma">
+        </div>
+        <div class="chef-info">
+          <h3 class="chef-name">Chef Rajesh Sharma</h3>
+          <div class="chef-title">Executive Chef & Culinary Director</div>
+          <span class="chef-experience">25+ Years Experience</span>
+          <p class="chef-bio">Trained in Michelin-starred restaurants across Europe, Chef Rajesh blends traditional Indian techniques with global culinary trends.</p>
+          
+          <div class="signature-dish">
+            <h4>👑 Signature Creation</h4>
+            <p><strong>Royal Mughlai Biryani:</strong> Slow-cooked with 21 aromatic spices, saffron, and premium basmati rice</p>
+          </div>
+          
+          <div class="chef-skills">
+            <span class="skill">Indian Cuisine</span>
+            <span class="skill">Molecular Gastronomy</span>
+            <span class="skill">Menu Development</span>
+            <span class="skill">Team Leadership</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chef 2 -->
+      <div class="chef-card fade-in">
+        <div class="chef-image">
+          <div class="chef-badge">Pastry Chef</div>
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&auto=format&fit=crop&q=80" alt="Chef Maria Rodriguez">
+        </div>
+        <div class="chef-info">
+          <h3 class="chef-name">Chef Maria Rodriguez</h3>
+          <div class="chef-title">Pastry & Dessert Specialist</div>
+          <span class="chef-experience">15+ Years Experience</span>
+          <p class="chef-bio">Le Cordon Bleu graduate with expertise in French patisserie and modern dessert presentations.</p>
+          
+          <div class="signature-dish">
+            <h4>🎂 Signature Creation</h4>
+            <p><strong>Chocolate Symphony:</strong> Three-layer chocolate mousse with gold leaf and seasonal berries</p>
+          </div>
+          
+          <div class="chef-skills">
+            <span class="skill">French Pastry</span>
+            <span class="skill">Chocolate Artistry</span>
+            <span class="skill">Sugar Sculpting</span>
+            <span class="skill">Vegan Desserts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chef 3 -->
+      <div class="chef-card fade-in">
+        <div class="chef-image">
+          <div class="chef-badge">Sushi Master</div>
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&auto=format&fit=crop&q=80" alt="Chef Akio Tanaka">
+        </div>
+        <div class="chef-info">
+          <h3 class="chef-name">Chef Akio Tanaka</h3>
+          <div class="chef-title">Japanese Cuisine Master</div>
+          <span class="chef-experience">20+ Years Experience</span>
+          <p class="chef-bio">Third-generation sushi master from Tokyo, specializing in traditional Edomae sushi and modern fusion.</p>
+          
+          <div class="signature-dish">
+            <h4>🍣 Signature Creation</h4>
+            <p><strong>Omakase Experience:</strong> Chef's choice 12-course sushi tasting with imported Japanese ingredients</p>
+          </div>
+          
+          <div class="chef-skills">
+            <span class="skill">Sushi Mastery</span>
+            <span class="skill">Knife Skills</span>
+            <span class="skill">Teppanyaki</span>
+            <span class="skill">Food Presentation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialties Section -->
+    <section class="specialties fade-in">
+      <div class="section-title">
+        <h2>Our Culinary Specialties</h2>
+        <p>Areas where we excel and innovate</p>
+      </div>
+      <div class="specialties-grid">
+        <div class="specialty-item">
+          <div class="specialty-icon">
+            <i class="fas fa-pepper-hot"></i>
+          </div>
+          <h3>Regional Indian Cuisine</h3>
+          <p>Authentic recipes from every corner of India</p>
+        </div>
+        
+        <div class="specialty-item">
+          <div class="specialty-icon">
+            <i class="fas fa-fish"></i>
+          </div>
+          <h3>Coastal Seafood</h3>
+          <p>Fresh catch with coastal preparation techniques</p>
+        </div>
+        
+        <div class="specialty-item">
+          <div class="specialty-icon">
+            <i class="fas fa-wine-bottle"></i>
+          </div>
+          <h3>Wine Pairing</h3>
+          <p>Expertly curated wine selections for every dish</p>
+        </div>
+        
+        <div class="specialty-item">
+          <div class="specialty-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Healthy & Organic</h3>
+          <p>Nutrition-focused meals with organic ingredients</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials fade-in">
+      <div class="section-title">
+        <h2>Guest Experiences</h2>
+        <p>What our guests say about our chefs</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p class="testimonial-text">"Chef Rajesh's biryani is an experience in itself. The layers of flavor are incredible!"</p>
+          <div class="testimonial-author">- Food Critic, Times of India</div>
+        </div>
+        
+        <div class="testimonial">
+          <p class="testimonial-text">"The dessert presentation by Chef Maria is like edible art. Truly remarkable!"</p>
+          <div class="testimonial-author">- International Food Blogger</div>
+        </div>
+        
+        <div class="testimonial">
+          <p class="testimonial-text">"Best sushi outside Japan. Chef Akio's attention to detail is extraordinary."</p>
+          <div class="testimonial-author">- Japanese Business Executive</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta fade-in">
+      <h2>Experience Culinary Excellence</h2>
+      <p>Book a table and taste the creations of our master chefs</p>
+      <a href="reservation.html" class="btn">Book Your Table Now</a>
+      <p style="margin-top: 20px; color: #aaa;">Or call: +91-990-480-0084</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Royal Restaurant</h3>
+          <p>Excellence in dining since 1995. Our chefs create unforgettable culinary experiences.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="main.html">Menu</a>
+          <a href="reservation.html">Reservations</a>
+          <a href="chefs.html">Our Chefs</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Restaurant St, Surat, India</p>
+          <p><i class="fas fa-phone"></i> +91-990-480-0084</p>
+          <p><i class="fas fa-envelope"></i> chefs@royalrestaurant.com</p>
+          <p><i class="fas fa-clock"></i> Open Daily: 11 AM - 11 PM</p>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Chef's Table</h3>
+          <p>Experience exclusive dining at our Chef's Table with personalized menus and wine pairing.</p>
+          <a href="reservation.html" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Book Chef's Table</a>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>© 2023 Royal Restaurant. All rights reserved. Crafted with ❤️ by our culinary team.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements
+    document.querySelectorAll('.hero, .section-title, .chef-card, .specialties, .testimonials, .cta').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Chef card hover effects
+    document.querySelectorAll('.chef-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-15px)';
+        this.style.boxShadow = '0 20px 40px rgba(193, 154, 107, 0.15)';
+        this.style.borderColor = '#c19a6b';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = 'none';
+        this.style.borderColor = '#333';
+      });
+    });
+    
+    // Specialty item hover
+    document.querySelectorAll('.specialty-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px)';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+    
+    // Active navigation link
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
