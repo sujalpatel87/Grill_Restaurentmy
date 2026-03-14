@@ -6,6 +6,419 @@
     <title>Grilli Restaurant - Table Reservation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            /* 🌑 DARK THEME COLORS - Complete Dark System */
+            
+            /* Pure Blacks */
+            --pure-black: #000000;
+            --rich-black: #0A0A0A;
+            --charcoal-black: #121212;
+            --onyx-black: #1A1A1A;
+            --jet-black: #222222;
+            --raisin-black: #2A2A2A;
+            
+            /* Dark Grays */
+            --dark-gray-1: #2D2D2D;
+            --dark-gray-2: #333333;
+            --dark-gray-3: #3A3A3A;
+            --dark-gray-4: #404040;
+            --dark-gray-5: #4A4A4A;
+            --dark-gray-6: #555555;
+            
+            /* Medium Dark Grays */
+            --slate-gray-1: #5A5A5A;
+            --slate-gray-2: #666666;
+            --slate-gray-3: #707070;
+            --slate-gray-4: #7A7A7A;
+            --slate-gray-5: #858585;
+            --slate-gray-6: #8F8F8F;
+            
+            /* Dark Accents */
+            --dark-gold: #8B7355;
+            --dark-maroon: #5A1E2A;
+            --dark-teal: #1E4A4D;
+            --dark-burgundy: #4A1C2A;
+            --dark-emerald: #1E4A2A;
+            --dark-amber: #664D1A;
+            
+            /* Surface Levels */
+            --surface-0: #000000;
+            --surface-1: #121212;
+            --surface-2: #1E1E1E;
+            --surface-3: #2A2A2A;
+            --surface-4: #333333;
+            --surface-5: #3D3D3D;
+            
+            /* Dark Text */
+            --text-primary-dark: #E0E0E0;
+            --text-secondary-dark: #B0B0B0;
+            --text-tertiary-dark: #808080;
+            --text-heading-dark: #FFFFFF;
+            
+            /* Dark States */
+            --hover-dark: rgba(255, 255, 255, 0.05);
+            --active-dark: rgba(255, 255, 255, 0.1);
+            --selected-dark: rgba(201, 162, 77, 0.15);
+            --focus-dark: rgba(201, 162, 77, 0.25);
+            --disabled-dark: rgba(255, 255, 255, 0.12);
+            
+            /* Dark Gradients */
+            --gradient-dark-1: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            --gradient-dark-2: linear-gradient(135deg, #121212 0%, #222222 100%);
+            --gradient-dark-3: linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%);
+            --gradient-dark-4: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
+            --gradient-dark-5: linear-gradient(45deg, #000000, #2A2A2A, #1A1A1A);
+            
+            /* Dark Shadows */
+            --shadow-dark-1: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-dark-2: 0 4px 8px rgba(0, 0, 0, 0.4);
+            --shadow-dark-3: 0 8px 16px rgba(0, 0, 0, 0.5);
+            --shadow-dark-4: 0 12px 24px rgba(0, 0, 0, 0.6);
+            --shadow-dark-5: 0 20px 40px rgba(0, 0, 0, 0.7);
+            --inner-shadow-dark: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            
+            /* Dark Borders */
+            --border-dark-1: 1px solid #2A2A2A;
+            --border-dark-2: 1px solid #333333;
+            --border-dark-3: 1px solid #404040;
+            --border-dark-4: 2px solid #4A4A4A;
+            --border-glow-dark: 0 0 0 2px rgba(139, 115, 85, 0.2);
+            
+            /* Functional Colors */
+            --success: #4CAF50;
+            --error: #F44336;
+            --warning: #FF9800;
+            --info: #2196F3;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: var(--rich-black);
+            color: var(--text-primary-dark);
+        }
+
+        body.dark-mode .container {
+            background-color: var(--surface-1);
+            box-shadow: var(--shadow-dark-3);
+        }
+
+        /* Header Dark Mode */
+        body.dark-mode .header {
+            background: var(--gradient-dark-5);
+        }
+
+        body.dark-mode .restaurant-name {
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .tagline {
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .description {
+            color: var(--text-secondary-dark);
+        }
+
+        /* Contact Section Dark Mode */
+        body.dark-mode .contact-section {
+            background-color: var(--surface-2);
+            border-bottom: var(--border-dark-2);
+        }
+
+        body.dark-mode .contact-title {
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .contact-title i {
+            color: var(--dark-gold);
+        }
+
+        body.dark-mode .contact-label {
+            color: var(--text-tertiary-dark);
+        }
+
+        body.dark-mode .contact-value {
+            color: var(--text-primary-dark);
+        }
+
+        body.dark-mode .contact-value.phone {
+            color: var(--dark-gold);
+        }
+
+        body.dark-mode .contact-value.email {
+            color: var(--dark-gold);
+        }
+
+        body.dark-mode .contact-icon {
+            color: var(--dark-gold);
+        }
+
+        /* Call Now Button Dark Mode */
+        body.dark-mode .call-now-btn {
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .call-now-btn:hover {
+            background: var(--gradient-dark-5);
+            box-shadow: var(--shadow-dark-3);
+        }
+
+        /* Separator Dark Mode */
+        body.dark-mode .separator {
+            background-color: var(--border-dark-2);
+        }
+
+        /* Form Section Dark Mode */
+        body.dark-mode .form-section {
+            background-color: var(--surface-2);
+        }
+
+        body.dark-mode .form-title {
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .form-title i {
+            color: var(--dark-gold);
+        }
+
+        body.dark-mode label {
+            color: var(--text-secondary-dark);
+        }
+
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea {
+            background-color: var(--surface-3);
+            border: var(--border-dark-2);
+            color: var(--text-primary-dark);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode select:focus,
+        body.dark-mode textarea:focus {
+            border-color: var(--dark-gold);
+            box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
+        }
+
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: var(--text-tertiary-dark);
+        }
+
+        /* Persons Counter Dark Mode */
+        body.dark-mode .persons-counter {
+            background-color: var(--surface-3);
+            border: var(--border-dark-2);
+        }
+
+        body.dark-mode .counter-btn {
+            background-color: var(--surface-4);
+            color: var(--text-primary-dark);
+        }
+
+        body.dark-mode .counter-btn:hover {
+            background-color: var(--dark-gold);
+            color: var(--text-heading-dark);
+        }
+
+        /* Submit Button Dark Mode */
+        body.dark-mode .submit-btn {
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .submit-btn:hover {
+            background: var(--gradient-dark-5);
+            box-shadow: var(--shadow-dark-3);
+        }
+
+        /* Call Form Button Dark Mode */
+        body.dark-mode .call-form-btn {
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .call-form-btn:hover {
+            background: var(--gradient-dark-5);
+            box-shadow: var(--shadow-dark-3);
+        }
+
+        /* Emergency Section Dark Mode */
+        body.dark-mode .emergency-section {
+            background-color: var(--surface-3);
+            border-left-color: var(--dark-amber);
+        }
+
+        body.dark-mode .emergency-title {
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .emergency-btn {
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+        }
+
+        body.dark-mode .emergency-btn:hover {
+            background: var(--gradient-dark-5);
+            box-shadow: var(--shadow-dark-3);
+        }
+
+        /* Success Message Dark Mode */
+        body.dark-mode .success-message {
+            background-color: var(--surface-3);
+            color: var(--success);
+            border: var(--border-dark-2);
+        }
+
+        /* Footer Dark Mode */
+        body.dark-mode .footer {
+            background-color: var(--surface-0);
+            color: var(--text-secondary-dark);
+            border-top: var(--border-dark-2);
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark-3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 3px solid var(--dark-gold);
+        }
+
+        .back-home:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: var(--shadow-dark-5);
+        }
+
+        .back-home .tooltip {
+            position: absolute;
+            left: 70px;
+            background: var(--surface-2);
+            color: var(--text-heading-dark);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-weight: 500;
+            border: var(--border-dark-2);
+        }
+
+        .back-home:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            left: 80px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark-3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 3px solid var(--dark-gold);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: var(--shadow-dark-5);
+        }
+
+        .back-to-top .tooltip {
+            position: absolute;
+            right: 70px;
+            background: var(--surface-2);
+            color: var(--text-heading-dark);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-weight: 500;
+            border: var(--border-dark-2);
+        }
+
+        .back-to-top:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 80px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-dark-3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 2px solid var(--dark-gold);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: var(--shadow-dark-4);
+        }
+
+        /* Smooth Transitions */
+        * {
+            transition: background-color 0.3s ease, 
+                        color 0.3s ease, 
+                        border-color 0.3s ease, 
+                        box-shadow 0.3s ease,
+                        background 0.3s ease;
+        }
+
+        /* Original Light Mode Styles (adapted for dark mode) */
         * {
             margin: 0;
             padding: 0;
@@ -14,8 +427,8 @@
         }
 
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: var(--rich-black);
+            color: var(--text-primary-dark);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -26,16 +439,16 @@
         .container {
             max-width: 1200px;
             width: 100%;
-            background-color: white;
+            background-color: var(--surface-1);
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-dark-3);
             overflow: hidden;
         }
 
         /* Header Section */
         .header {
-            background-color: #1a1a1a;
-            color: white;
+            background: var(--gradient-dark-5);
+            color: var(--text-heading-dark);
             padding: 40px;
             text-align: center;
         }
@@ -43,7 +456,7 @@
         .restaurant-name {
             font-size: 36px;
             font-weight: 700;
-            color: white;
+            color: var(--text-heading-dark);
             margin-bottom: 10px;
             letter-spacing: 0.5px;
         }
@@ -51,14 +464,14 @@
         .tagline {
             font-size: 28px;
             font-weight: 600;
-            color: white;
+            color: var(--text-heading-dark);
             margin-bottom: 15px;
         }
 
         .description {
             font-size: 16px;
             line-height: 1.6;
-            color: #ccc;
+            color: var(--text-secondary-dark);
             max-width: 800px;
             margin: 0 auto;
         }
@@ -66,14 +479,14 @@
         /* Contact Information */
         .contact-section {
             padding: 30px 40px;
-            background-color: white;
-            border-bottom: 1px solid #e0e0e0;
+            background-color: var(--surface-2);
+            border-bottom: var(--border-dark-2);
         }
 
         .contact-title {
             font-size: 20px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-heading-dark);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -81,7 +494,7 @@
         }
 
         .contact-title i {
-            color: #333;
+            color: var(--dark-gold);
         }
 
         .contact-grid {
@@ -100,7 +513,7 @@
         .contact-icon {
             width: 24px;
             height: 24px;
-            color: #666;
+            color: var(--dark-gold);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -113,7 +526,7 @@
 
         .contact-label {
             font-size: 12px;
-            color: #666;
+            color: var(--text-tertiary-dark);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 2px;
@@ -122,7 +535,7 @@
 
         .contact-value {
             font-size: 15px;
-            color: #333;
+            color: var(--text-primary-dark);
             font-weight: 500;
             line-height: 1.4;
         }
@@ -130,11 +543,11 @@
         .contact-value.phone {
             font-size: 16px;
             font-weight: 600;
-            color: #1a1a1a;
+            color: var(--dark-gold);
         }
 
         .contact-value.email {
-            color: #0066cc;
+            color: var(--dark-gold);
             text-decoration: none;
         }
 
@@ -144,8 +557,8 @@
 
         /* Call Now Button */
         .call-now-btn {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #1a1a1a;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
             border: none;
             padding: 14px 28px;
             border-radius: 8px;
@@ -163,32 +576,29 @@
         }
 
         .call-now-btn:hover {
+            background: var(--gradient-dark-5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .call-now-btn:active {
-            transform: translateY(-1px);
+            box-shadow: var(--shadow-dark-3);
         }
 
         /* Separator Line */
         .separator {
             border: none;
             height: 1px;
-            background-color: #e0e0e0;
+            background-color: var(--border-dark-2);
             margin: 0 40px;
         }
 
         /* Form Section */
         .form-section {
             padding: 30px 40px;
-            background-color: white;
+            background-color: var(--surface-2);
         }
 
         .form-title {
             font-size: 20px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-heading-dark);
             margin-bottom: 25px;
             display: flex;
             align-items: center;
@@ -196,7 +606,7 @@
         }
 
         .form-title i {
-            color: #333;
+            color: var(--dark-gold);
         }
 
         .form-group {
@@ -217,7 +627,7 @@
         label {
             display: block;
             margin-bottom: 6px;
-            color: #333;
+            color: var(--text-secondary-dark);
             font-weight: 600;
             font-size: 14px;
             text-transform: uppercase;
@@ -226,29 +636,29 @@
 
         label.required::after {
             content: " *";
-            color: #dc3545;
+            color: var(--error);
         }
 
         input, select, textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: var(--border-dark-2);
             border-radius: 6px;
             font-size: 15px;
-            color: #333;
+            color: var(--text-primary-dark);
             transition: all 0.3s;
-            background-color: white;
+            background-color: var(--surface-3);
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #666;
-            box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.1);
+            border-color: var(--dark-gold);
+            box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
         }
 
         /* Placeholder styling */
         ::placeholder {
-            color: #999;
+            color: var(--text-tertiary-dark);
             font-weight: normal;
         }
 
@@ -261,32 +671,38 @@
 
         /* Date input styling */
         input#date {
-            background-color: white;
+            background-color: var(--surface-3);
             font-family: inherit;
+            color-scheme: dark;
         }
 
         /* Time select styling */
         select#time {
-            background-color: white;
-            color: #333;
-            border: 1px solid #ddd;
+            background-color: var(--surface-3);
+            color: var(--text-primary-dark);
+            border: var(--border-dark-2);
             font-weight: 500;
+        }
+
+        select#time option {
+            background-color: var(--surface-3);
+            color: var(--text-primary-dark);
         }
 
         /* Persons counter */
         .persons-counter {
             display: flex;
             align-items: center;
-            border: 1px solid #ddd;
+            border: var(--border-dark-2);
             border-radius: 6px;
             overflow: hidden;
-            background-color: white;
+            background-color: var(--surface-3);
         }
 
         .counter-btn {
-            background-color: #f8f9fa;
+            background-color: var(--surface-4);
             border: none;
-            color: #333;
+            color: var(--text-primary-dark);
             font-size: 18px;
             width: 44px;
             height: 44px;
@@ -298,7 +714,8 @@
         }
 
         .counter-btn:hover {
-            background-color: #e9ecef;
+            background-color: var(--dark-gold);
+            color: var(--text-heading-dark);
         }
 
         .persons-counter input {
@@ -308,6 +725,7 @@
             background: transparent;
             font-size: 16px;
             font-weight: 600;
+            color: var(--text-primary-dark);
         }
 
         /* Textarea styling */
@@ -319,7 +737,7 @@
 
         /* Form validation */
         .error-message {
-            color: #dc3545;
+            color: var(--error);
             font-size: 13px;
             margin-top: 5px;
             display: flex;
@@ -335,13 +753,13 @@
         .form-group.error input,
         .form-group.error select,
         .form-group.error textarea {
-            border-color: #dc3545;
+            border-color: var(--error);
         }
 
         /* Submit button */
         .submit-btn {
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            color: white;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
             border: none;
             padding: 16px 32px;
             border-radius: 8px;
@@ -360,14 +778,15 @@
         }
 
         .submit-btn:hover {
+            background: var(--gradient-dark-5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-dark-3);
         }
 
         /* Call button in form */
         .call-form-btn {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
             border: none;
             padding: 14px 28px;
             border-radius: 8px;
@@ -384,30 +803,31 @@
         }
 
         .call-form-btn:hover {
+            background: var(--gradient-dark-5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-dark-3);
         }
 
         /* Emergency section */
         .emergency-section {
             margin-top: 25px;
             padding: 20px;
-            background-color: #fff8e1;
+            background-color: var(--surface-3);
             border-radius: 8px;
-            border-left: 4px solid #ff9800;
+            border-left: 4px solid var(--dark-amber);
             text-align: center;
         }
 
         .emergency-title {
             font-size: 16px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-heading-dark);
             margin-bottom: 8px;
         }
 
         .emergency-btn {
-            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
-            color: white;
+            background: var(--gradient-dark-4);
+            color: var(--text-heading-dark);
             border: none;
             padding: 12px 24px;
             border-radius: 6px;
@@ -425,20 +845,21 @@
         }
 
         .emergency-btn:hover {
+            background: var(--gradient-dark-5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+            box-shadow: var(--shadow-dark-3);
         }
 
         /* Success message */
         .success-message {
             display: none;
-            background-color: #d4edda;
-            color: #155724;
+            background-color: var(--surface-3);
+            color: var(--success);
             padding: 16px;
             border-radius: 8px;
             margin-top: 20px;
             text-align: center;
-            border: 1px solid #c3e6cb;
+            border: var(--border-dark-2);
             animation: fadeIn 0.5s ease;
         }
 
@@ -446,6 +867,7 @@
             font-size: 20px;
             margin-bottom: 8px;
             display: block;
+            color: var(--success);
         }
 
         @keyframes fadeIn {
@@ -455,11 +877,12 @@
 
         /* Footer */
         .footer {
-            background-color: #1a1a1a;
-            color: #ccc;
+            background-color: var(--surface-0);
+            color: var(--text-secondary-dark);
             padding: 25px 40px;
             text-align: center;
             margin-top: 30px;
+            border-top: var(--border-dark-2);
         }
 
         .footer p {
@@ -509,6 +932,29 @@
             .footer {
                 padding: 20px;
             }
+            
+            .back-home,
+            .back-to-top,
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .back-home {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .theme-toggle {
+                top: 20px;
+                right: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -536,7 +982,24 @@
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
+    <!-- Back to Home Button -->
+    <div class="back-home" id="backHome" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i>
+        <span class="tooltip">Back to Home</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+        <span class="tooltip">Back to Top</span>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+    </div>
+
     <div class="container">
         <!-- Header Section -->
         <div class="header">
@@ -757,6 +1220,49 @@
     </div>
 
     <script>
+        // Dark Mode Management
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            themeIcon.className = 'fas fa-moon';
+        }
+
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Back to Top functionality
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        window.scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+
         // Restaurant contact information
         const restaurantPhone = '+919904800085';
         const formattedPhone = '+91 990-480-0085';
@@ -1083,17 +1589,6 @@
 
             // Format phone placeholder on load
             phoneInput.placeholder = '+91 99048 00085';
-            
-            // Pre-fill with example data for testing
-            function fillExampleData() {
-                nameInput.value = 'John Smith';
-                emailInput.value = 'john.smith@example.com';
-                phoneInput.value = '9876543210';
-                specialRequests.value = 'Window seat preferred, please';
-            }
-            
-            // Uncomment for testing:
-            // fillExampleData();
         });
     </script>
 </body>

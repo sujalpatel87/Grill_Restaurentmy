@@ -5,9 +5,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Event Booking -  Grilli Restaurant</title>
+  <title>Event Booking - Grilli Restaurant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
+    :root {
+      /* 🌑 DARK THEME COLORS - Complete Dark System */
+      
+      /* Pure Blacks */
+      --pure-black: #000000;
+      --rich-black: #0A0A0A;
+      --charcoal-black: #121212;
+      --onyx-black: #1A1A1A;
+      --jet-black: #222222;
+      --raisin-black: #2A2A2A;
+      
+      /* Dark Grays */
+      --dark-gray-1: #2D2D2D;
+      --dark-gray-2: #333333;
+      --dark-gray-3: #3A3A3A;
+      --dark-gray-4: #404040;
+      --dark-gray-5: #4A4A4A;
+      --dark-gray-6: #555555;
+      
+      /* Medium Dark Grays */
+      --slate-gray-1: #5A5A5A;
+      --slate-gray-2: #666666;
+      --slate-gray-3: #707070;
+      --slate-gray-4: #7A7A7A;
+      --slate-gray-5: #858585;
+      --slate-gray-6: #8F8F8F;
+      
+      /* Dark Accents */
+      --dark-gold: #c19a6b;
+      --dark-maroon: #5A1E2A;
+      --dark-teal: #1E4A4D;
+      --dark-burgundy: #4A1C2A;
+      --dark-emerald: #1E4A2A;
+      --dark-amber: #664D1A;
+      
+      /* Surface Levels */
+      --surface-0: #000000;
+      --surface-1: #121212;
+      --surface-2: #1A1A1A;
+      --surface-3: #222222;
+      --surface-4: #2A2A2A;
+      --surface-5: #333333;
+      
+      /* Dark Text */
+      --text-primary-dark: #E0E0E0;
+      --text-secondary-dark: #B0B0B0;
+      --text-tertiary-dark: #808080;
+      --text-heading-dark: #FFFFFF;
+      
+      /* Dark States */
+      --hover-dark: rgba(255, 255, 255, 0.05);
+      --active-dark: rgba(255, 255, 255, 0.1);
+      --selected-dark: rgba(193, 154, 107, 0.15);
+      --focus-dark: rgba(193, 154, 107, 0.25);
+      --disabled-dark: rgba(255, 255, 255, 0.12);
+      
+      /* Dark Gradients */
+      --gradient-dark-1: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+      --gradient-dark-2: linear-gradient(135deg, #121212 0%, #222222 100%);
+      --gradient-dark-3: linear-gradient(180deg, #1A1A1A 0%, #0A0A0A 100%);
+      --gradient-dark-4: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
+      --gradient-dark-5: linear-gradient(45deg, #000000, #2A2A2A, #1A1A1A);
+      --gradient-gold: linear-gradient(135deg, #c19a6b 0%, #d4b48c 100%);
+      
+      /* Dark Shadows */
+      --shadow-dark-1: 0 2px 4px rgba(0, 0, 0, 0.3);
+      --shadow-dark-2: 0 4px 8px rgba(0, 0, 0, 0.4);
+      --shadow-dark-3: 0 8px 16px rgba(0, 0, 0, 0.5);
+      --shadow-dark-4: 0 12px 24px rgba(0, 0, 0, 0.6);
+      --shadow-dark-5: 0 20px 40px rgba(0, 0, 0, 0.7);
+      --inner-shadow-dark: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      
+      /* Dark Borders */
+      --border-dark-1: 1px solid #2A2A2A;
+      --border-dark-2: 1px solid #333333;
+      --border-dark-3: 1px solid #404040;
+      --border-dark-4: 2px solid #4A4A4A;
+      --border-glow-dark: 0 0 0 2px rgba(193, 154, 107, 0.2);
+      
+      /* Functional Colors */
+      --success: #4CAF50;
+      --error: #F44336;
+      --warning: #FF9800;
+      --info: #2196F3;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,34 +102,150 @@
     }
     
     body {
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--rich-black);
+      color: var(--text-primary-dark);
       line-height: 1.6;
     }
     
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
     
+    /* Back to Home Button */
+    .back-home {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: var(--gradient-gold);
+      color: var(--rich-black);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-dark-3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border: 3px solid var(--dark-gold);
+    }
+
+    .back-home:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: var(--shadow-dark-5);
+    }
+
+    .back-home .tooltip {
+      position: absolute;
+      left: 70px;
+      background: var(--surface-3);
+      color: var(--text-heading-dark);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      font-weight: 500;
+      border: var(--border-dark-2);
+    }
+
+    .back-home:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      left: 80px;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--gradient-gold);
+      color: var(--rich-black);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-dark-3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border: 3px solid var(--dark-gold);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: var(--shadow-dark-5);
+    }
+
+    .back-to-top .tooltip {
+      position: absolute;
+      right: 70px;
+      background: var(--surface-3);
+      color: var(--text-heading-dark);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      font-weight: 500;
+      border: var(--border-dark-2);
+    }
+
+    .back-to-top:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      right: 80px;
+    }
+
+    /* Smooth Transitions */
+    * {
+      transition: background-color 0.3s ease, 
+                  color 0.3s ease, 
+                  border-color 0.3s ease, 
+                  box-shadow 0.3s ease,
+                  background 0.3s ease;
+    }
+    
     /* Header */
     header {
-      background: #111;
+      background: var(--gradient-dark-5);
       padding: 20px 0;
-      border-bottom: 2px solid #c19a6b;
+      border-bottom: 2px solid var(--dark-gold);
+      box-shadow: var(--shadow-dark-2);
     }
     
     .logo {
       text-align: center;
       font-size: 2.5rem;
-      color: #c19a6b;
+      color: var(--dark-gold);
       font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .logo span {
-      color: #fff;
+      color: var(--text-heading-dark);
     }
     
     nav {
@@ -51,136 +254,177 @@
     }
     
     nav a {
-      color: #fff;
+      color: var(--text-primary-dark);
       text-decoration: none;
       margin: 0 15px;
       font-size: 1.1rem;
+      transition: color 0.3s;
+      padding: 5px 10px;
+      border-radius: 5px;
     }
     
     nav a:hover {
-      color: #c19a6b;
+      color: var(--dark-gold);
+      background: var(--hover-dark);
     }
     
     /* Hero */
     .hero {
       text-align: center;
-      padding: 60px 20px;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+      padding: 80px 20px;
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                   url('https://images.unsplash.com/photo-1543711081-53d8d1c5d87a?w=500&auto=format&fit=crop&q=60');
       background-size: cover;
       background-position: center;
       margin: 20px 0;
-      border-radius: 10px;
+      border-radius: 15px;
+      border: var(--border-dark-1);
+      box-shadow: var(--shadow-dark-3);
     }
     
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 20px;
-      color: #c19a6b;
+      color: var(--dark-gold);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .hero p {
       font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto;
-      color: #ccc;
+      color: var(--text-secondary-dark);
     }
     
     /* Events */
     .events {
-      margin: 40px 0;
+      margin: 60px 0;
     }
     
     .section-title {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: #c19a6b;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: var(--dark-gold);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--dark-gold);
+      border-radius: 2px;
     }
     
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
     }
     
     .event-card {
-      background: #111;
-      border-radius: 10px;
+      background: var(--surface-2);
+      border-radius: 15px;
       overflow: hidden;
-      border: 1px solid #333;
-      transition: transform 0.3s;
+      border: var(--border-dark-1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--shadow-dark-2);
     }
     
     .event-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-dark-4);
+      border-color: var(--dark-gold);
     }
     
     .event-img {
-      height: 200px;
+      height: 220px;
       width: 100%;
       object-fit: cover;
+      border-bottom: 2px solid var(--dark-gold);
     }
     
     .event-content {
-      padding: 20px;
+      padding: 25px;
     }
     
     .event-content h3 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       margin-bottom: 10px;
-      color: #fff;
+      color: var(--text-heading-dark);
     }
     
     .event-price {
-      color: #c19a6b;
-      font-size: 1.3rem;
+      color: var(--dark-gold);
+      font-size: 1.5rem;
       font-weight: bold;
       margin-bottom: 15px;
+      background: var(--surface-3);
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 25px;
     }
     
     .event-features {
       list-style: none;
-      margin: 15px 0;
+      margin: 20px 0;
     }
     
     .event-features li {
-      padding: 5px 0;
-      color: #ccc;
-      border-bottom: 1px solid #222;
+      padding: 8px 0;
+      color: var(--text-secondary-dark);
+      border-bottom: 1px solid var(--border-dark-1);
+    }
+    
+    .event-features li:last-child {
+      border-bottom: none;
     }
     
     .event-btn {
       display: block;
       width: 100%;
-      background: #c19a6b;
-      color: #000;
+      background: var(--gradient-gold);
+      color: var(--rich-black);
       border: none;
-      padding: 12px;
-      font-size: 1rem;
+      padding: 14px;
+      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 5px;
-      margin-top: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .event-btn:hover {
-      background: #d4b48c;
+      background: var(--gradient-dark-4);
+      color: var(--text-heading-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-dark-3);
     }
     
     /* Booking Form */
     .booking-form {
-      background: #111;
-      padding: 30px;
-      border-radius: 10px;
-      border: 1px solid #333;
+      background: var(--surface-2);
+      padding: 40px;
+      border-radius: 15px;
+      border: var(--border-dark-1);
       margin: 40px 0;
+      box-shadow: var(--shadow-dark-3);
     }
     
     .booking-form h2 {
       text-align: center;
+      font-size: 2rem;
       margin-bottom: 30px;
-      color: #c19a6b;
+      color: var(--dark-gold);
     }
     
     .form-group {
@@ -190,19 +434,48 @@
     .form-group label {
       display: block;
       margin-bottom: 8px;
-      color: #fff;
+      color: var(--text-primary-dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .form-group label::after {
+      content: " *";
+      color: var(--dark-gold);
+      display: inline;
     }
     
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 12px;
-      background: #222;
-      border: 1px solid #333;
-      border-radius: 5px;
-      color: #fff;
+      padding: 14px;
+      background: var(--surface-3);
+      border: var(--border-dark-2);
+      border-radius: 8px;
+      color: var(--text-primary-dark);
       font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--dark-gold);
+      box-shadow: var(--border-glow-dark);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-tertiary-dark);
+    }
+
+    select option {
+      background: var(--surface-3);
+      color: var(--text-primary-dark);
     }
     
     .form-row {
@@ -220,10 +493,15 @@
     /* Footer */
     footer {
       text-align: center;
-      padding: 30px 0;
-      border-top: 1px solid #333;
-      margin-top: 40px;
-      color: #777;
+      padding: 40px 0;
+      border-top: var(--border-dark-2);
+      margin-top: 60px;
+      color: var(--text-tertiary-dark);
+      background: var(--surface-1);
+    }
+    
+    footer p {
+      margin: 5px 0;
     }
     
     /* Modal */
@@ -234,54 +512,172 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
       justify-content: center;
       align-items: center;
     }
     
     .modal-content {
-      background: #111;
-      padding: 30px;
-      border-radius: 10px;
+      background: var(--surface-2);
+      padding: 40px;
+      border-radius: 15px;
       width: 90%;
       max-width: 500px;
-      border: 1px solid #333;
+      border: var(--border-dark-1);
+      box-shadow: var(--shadow-dark-5);
+    }
+
+    .modal-content h2 {
+      color: var(--dark-gold);
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .modal-content p {
+      color: var(--text-primary-dark);
+      margin-bottom: 15px;
+      padding: 12px;
+      background: var(--surface-3);
+      border-radius: 8px;
+      font-size: 1.1rem;
     }
     
     .modal-close {
-      background: #c19a6b;
-      color: #000;
+      background: var(--gradient-gold);
+      color: var(--rich-black);
       border: none;
-      padding: 10px 20px;
+      padding: 14px 20px;
       font-weight: bold;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 15px;
       width: 100%;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .modal-close:hover {
+      background: var(--gradient-dark-4);
+      color: var(--text-heading-dark);
+      transform: translateY(-2px);
     }
     
     .success-message {
-      background: #111;
-      padding: 20px;
+      background: var(--surface-2);
+      padding: 25px;
       border-radius: 10px;
       text-align: center;
       display: none;
       margin-top: 20px;
+      border: 1px solid var(--success);
+      animation: fadeIn 0.5s ease;
     }
     
     .success-message h3 {
-      color: #c19a6b;
+      color: var(--dark-gold);
       margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .success-message p {
+      color: var(--text-primary-dark);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loading Animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--dark-gold);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Responsive Design for Buttons */
+    @media (max-width: 768px) {
+      .back-home,
+      .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+
+      .back-home {
+        bottom: 20px;
+        left: 20px;
+      }
+
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .back-home,
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .event-content h3 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- Back to Home Button -->
+  <div class="back-home" id="backHome" onclick="window.location.href='index.html'">
+    <i class="fas fa-home"></i>
+    <span class="tooltip">Back to Home</span>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+    <span class="tooltip">Back to Top</span>
+  </div>
+
   <!-- Header -->
   <header>
     <div class="container">
-      <div class="logo">Grilli <span>Restaurant </span></div>
+      <div class="logo">Grilli <span>Restaurant</span></div>
       <nav>
         <a href="index.html">Home</a>
         <a href="#events">Events</a>
@@ -368,22 +764,22 @@
       <form id="eventForm">
         <div class="form-row">
           <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" required>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
           </div>
           <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your.email@example.com" required>
           </div>
         </div>
         
         <div class="form-row">
           <div class="form-group">
-            <label for="phone">Phone *</label>
-            <input type="tel" id="phone" required>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="9876543210" maxlength="10" required>
           </div>
           <div class="form-group">
-            <label for="eventType">Event Type *</label>
+            <label for="eventType">Event Type</label>
             <select id="eventType" required>
               <option value="">Select Event</option>
               <option value="wedding">Wedding</option>
@@ -396,18 +792,18 @@
         
         <div class="form-row">
           <div class="form-group">
-            <label for="date">Event Date *</label>
+            <label for="date">Event Date</label>
             <input type="date" id="date" required>
           </div>
           <div class="form-group">
-            <label for="guests">Number of Guests *</label>
-            <input type="number" id="guests" min="1" max="500" required>
+            <label for="guests">Number of Guests</label>
+            <input type="number" id="guests" min="1" max="500" placeholder="Enter number of guests" required>
           </div>
         </div>
         
         <div class="form-group">
           <label for="message">Special Requirements</label>
-          <textarea id="message" rows="4"></textarea>
+          <textarea id="message" rows="4" placeholder="Any special requirements or notes..."></textarea>
         </div>
         
         <button type="submit" class="event-btn">Submit Inquiry</button>
@@ -428,17 +824,17 @@
       <p id="modalPrice">Price: ₹5,00,000</p>
       
       <div class="form-group">
-        <label for="modalName">Your Name *</label>
-        <input type="text" id="modalName" required>
+        <label for="modalName">Your Name</label>
+        <input type="text" id="modalName" placeholder="Enter your name" required>
       </div>
       
       <div class="form-group">
-        <label for="modalPhone">Phone Number *</label>
-        <input type="tel" id="modalPhone" required>
+        <label for="modalPhone">Phone Number</label>
+        <input type="tel" id="modalPhone" placeholder="9876543210" maxlength="10" required>
       </div>
       
       <div class="form-group">
-        <label for="modalDate">Event Date *</label>
+        <label for="modalDate">Event Date</label>
         <input type="date" id="modalDate" required>
       </div>
       
@@ -450,17 +846,42 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>Royal Restaurant Events</p>
-      <p>Contact: +91-990-480-0084 | events@royalrestaurant.com</p>
-      <p>© 2023 Royal Restaurant. All rights reserved.</p>
+      <p>Grilli Restaurant Events</p>
+      <p>Contact: +91-990-480-0084 | events@grillirestaurant.com</p>
+      <p>© 2024 Grilli Restaurant. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
+    // Back to Top functionality
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+
+    window.scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    };
+
     // Set minimum date to today
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('date').min = today;
     document.getElementById('modalDate').min = today;
+
+    // Set default date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+    document.getElementById('date').value = tomorrowStr;
+    document.getElementById('modalDate').value = tomorrowStr;
 
     // Book Now buttons
     document.querySelectorAll('.book-now').forEach(button => {
@@ -478,19 +899,25 @@
     // Close modal
     function closeModal() {
       document.getElementById('bookingModal').style.display = 'none';
+      // Reset modal form
+      document.getElementById('modalName').value = '';
+      document.getElementById('modalPhone').value = '';
+      document.getElementById('modalDate').value = tomorrowStr;
     }
 
     // Close modal when clicking outside
     window.addEventListener('click', function(e) {
       const modal = document.getElementById('bookingModal');
       if (e.target === modal) {
-        modal.style.display = 'none';
+        closeModal();
       }
     });
 
     // Confirm booking
     document.getElementById('confirmBooking').addEventListener('click', function() {
-      const name = document.getElementById('modalName').value;
+      const name = document.getElementById('modalName').value.trim();
+      const phone = document.getElementById('modalPhone').value.trim();
+      const date = document.getElementById('modalDate').value;
       const event = document.getElementById('modalEvent').textContent;
       
       if (!name) {
@@ -498,24 +925,48 @@
         return;
       }
       
-      alert(`Thank you ${name}! Your ${event} booking has been confirmed. We will call you shortly.`);
-      closeModal();
+      if (!phone) {
+        alert('Please enter your phone number');
+        return;
+      }
       
-      // Reset form
-      document.getElementById('modalName').value = '';
-      document.getElementById('modalPhone').value = '';
-      document.getElementById('modalDate').value = '';
+      if (phone.length !== 10) {
+        alert('Please enter a valid 10-digit phone number');
+        return;
+      }
+      
+      if (!date) {
+        alert('Please select event date');
+        return;
+      }
+      
+      alert(`Thank you ${name}! Your ${event} booking has been confirmed. We will contact you shortly at ${phone}.`);
+      closeModal();
     });
 
     // Event form submission
     document.getElementById('eventForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const name = document.getElementById('name').value;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
       const eventType = document.getElementById('eventType').value;
+      const date = document.getElementById('date').value;
+      const guests = document.getElementById('guests').value;
       
-      if (!name || !eventType) {
+      if (!name || !email || !phone || !eventType || !date || !guests) {
         alert('Please fill all required fields');
+        return;
+      }
+      
+      if (phone.length !== 10) {
+        alert('Please enter a valid 10-digit phone number');
+        return;
+      }
+      
+      if (!email.includes('@') || !email.includes('.')) {
+        alert('Please enter a valid email address');
         return;
       }
       
@@ -524,10 +975,16 @@
       
       // Reset form
       this.reset();
+      document.getElementById('date').value = tomorrowStr;
       document.getElementById('date').min = today;
       
       // Scroll to success message
       document.getElementById('successMessage').scrollIntoView({behavior: 'smooth'});
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'none';
+      }, 5000);
     });
 
     // Phone number formatting
@@ -539,13 +996,24 @@
       this.value = this.value.replace(/\D/g, '').substring(0, 10);
     });
 
-    // Simple email validation
-    document.getElementById('email').addEventListener('blur', function() {
-      const email = this.value;
-      if (email && !email.includes('@')) {
-        alert('Please enter a valid email address');
-        this.focus();
-      }
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          const headerOffset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
   </script>
 </body>

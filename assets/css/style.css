@@ -1307,6 +1307,58 @@ body.nav-active { overflow: hidden; }
   color: var(--gold-crayola);
 }
 
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px hsla(0, 0%, 0%, 0.15);
+}
+
+.contact .card-icon ion-icon {
+  color: var(--gold-crayola);
+  font-size: 3rem;
+}
+
+.contact .card-title {
+  color: var(--eerie-black-1);
+  margin-block: 15px 10px;
+}
+
+/* DARK THEME OVERRIDES */
+.dark-theme .contact {
+  background-color: var(--smoky-black-2);
+  color: var(--white);
+}
+
+.dark-theme .contact .section-title {
+  color: var(--white);
+}
+
+.dark-theme .contact .section-text {
+  color: var(--quick-silver);
+}
+
+.dark-theme .contact-card {
+  background-color: var(--eerie-black-3);
+  color: var(--white);
+  border: 1px solid var(--white-alpha-10);
+}
+
+.dark-theme .contact .card-title {
+  color: var(--white);
+}
+
+.dark-theme .contact .card-text {
+  color: var(--quick-silver);
+}
+
+.dark-theme .contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .contact .card-icon ion-icon {
+  color: var(--gold-crayola);
+}
+
 
 
 

@@ -1,0 +1,59 @@
+/* Shared Theme CSS - Extracted from main.html */
+:root {
+    --primary: #8D6E63;      /* Main brown color */
+    --primary-dark: #5D4037; /* Dark brown */
+    --primary-light: #BDB5A4; /* Light brown/cream */
+    --secondary: #A1887F;    /* Muted brown */
+    --accent: #6D4C41;       /* Deep brown accent */
+    --accent-light: #FFB74D; /* Warm orange accent for highlights */
+    --text-dark: #2a2a2a;    /* Dark text for readability */
+    --text-light: #666666;   /* Medium gray text */
+    --text-brown: #8D6E63;   /* Brownish text */
+    --bg-dark: #f8f6f4;      /* Light cream background */
+    --bg-medium: #f0ede9;    /* Light cream medium background */
+    --bg-light: #e8e5e1;     /* Light cream light background */
+    --bg-cream: #f8f6f4;     /* Light cream background */
+    --bg-card: #ffffff;      /* White card background */
+    --border: #8D6E63;       /* Border color matching theme */
+    --border-light: #BDB5A4; /* Light border */
+    --shadow: rgba(141, 110, 99, 0.15);
+    --success: #4CAF50;      /* Green for success messages */
+    --error: #F44336;        /* Red for errors */
+}
+
+/* Base body styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Essential shared utilities */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styling */
+header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Selection */
+::selection {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Additional essential styles for proper rendering */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
